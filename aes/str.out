@@ -1,0 +1,4 @@
+Starting Sim
+output: 11000110
+Finishing Sim
+./sbox_tb.sv:21: $finish called at 10000 (1ps)
