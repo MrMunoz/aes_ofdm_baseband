@@ -4,7 +4,7 @@
 module simpl
     (
     input wire [3:0] x,
-    output wire [3:0] y
+    output logic [3:0] y
     );
     
 always_comb begin

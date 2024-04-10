@@ -1,23 +1,43 @@
-`timescale 1ns / 1ps
-`default_nettype none
-module sbox_tb #(parameter int EXP_WIDTH = 5)();
-    logic [7:0] x;
-    logic [7:0] temp;
-    logic [7:0] y;   
+`timescale 1ns/1ps
 
-    isomorphic_map dut1(x, temp);
+module sbox_tb ();
+    logic clock;
 
-    affine_inverse_iso dut2(temp, y);
-
-
-    //initial block...this is our test simulation
-    initial begin
-        $display("Starting Sim"); //print nice message at start
-        x = 'h0f;
-        #10
-   
-        $display("output: %b", y); //print values C-style formatting
-        $display("Finishing Sim"); //print nice message at end
-        $finish;
+    always begin
+        #2.5;
+        clock = 0;
+        #2.5;
+        clock = 1;
     end
+    
+    logic [7:0] x,y,my_x;
+
+    sbox dut (
+        .clk(clock),
+        .x(x),
+        .y(y),
+        .my_x(my_x)
+    );
+
+    initial begin
+        $dumpfile("sbox.test.vcd");
+        $dumpvars(0, sbox_tb);
+        $display("----- sbox Unit Test -----");
+        x = 'h00;
+    end
+
+    always_ff @(posedge clock) begin
+        x <= x + 1;
+       // $display("in: %h", x);
+    end 
+
+    always_ff @(posedge clock) begin
+        $display("out: y: %h my_x: %h", y, my_x);
+        if (my_x == 'hFF) begin
+            $finish;
+        end
+    end
+
+
+
 endmodule: sbox_tb
