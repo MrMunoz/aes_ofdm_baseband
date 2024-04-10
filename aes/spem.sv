@@ -1,4 +1,4 @@
-
+`default_nettype none
 // A GF(2^4) multiplier
 module spem
     (

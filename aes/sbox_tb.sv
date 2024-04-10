@@ -32,7 +32,7 @@ module sbox_tb ();
     end 
 
     always_ff @(posedge clock) begin
-        $display("out: y: %h my_x: %h", y, my_x);
+        $display("%h %h", my_x, y);
         if (my_x == 'hFF) begin
             $finish;
         end

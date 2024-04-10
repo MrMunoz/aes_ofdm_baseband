@@ -1,9 +1,11 @@
+`default_nettype none
+
 module sbox
     (
     input wire clk,
     input wire [7:0] x,
-    output logic [7:0] y,
-    output logic [7:0] my_x
+    output logic [7:0] y
+    //output logic [7:0] my_x
     );
 
     // Isomorphic mapping
@@ -13,12 +15,12 @@ module sbox
 
     // Reg
     logic [3:0] high_0, low_0, h_xor_l_0;
-    logic [7:0] x_0;
+    //logic [7:0] x_0;
     always_ff @(posedge clk ) begin
         high_0 <= mapped[7:4];
         h_xor_l_0 <= mapped[7:4] ^ mapped[3:0];
         low_0 <= mapped[3:0];
-        x_0 <= x;
+        //x_0 <= x;
     end
 
     // Stage 1
@@ -32,12 +34,12 @@ module sbox
 
     // Reg
     logic [3:0] high_1, h_xor_l_1, prod_xor_map_1;
-    logic [7:0] x_1;
+    //logic [7:0] x_1;
     always_ff @(posedge clk ) begin
         high_1 <= high_0;
         h_xor_l_1 <= h_xor_l_0;
         prod_xor_map_1 <= stage_1_lambda ^ stage_1_prod;
-        x_1 <= x_0;
+        //x_1 <= x_0;
     end
 
     // Stage 2
@@ -47,12 +49,12 @@ module sbox
 
     // Reg
     logic [3:0] high_2, h_xor_l_2, inv_2;
-    logic [7:0] x_2;
+    //logic [7:0] x_2;
     always_ff @(posedge clk ) begin
         high_2 <= high_1;
         h_xor_l_2 <= h_xor_l_1;
         inv_2 <= inv;
-        x_2 <= x_1;
+       // x_2 <= x_1;
     end
 
     // Stage 3
@@ -65,11 +67,11 @@ module sbox
     // Reg
 
     logic [3:0] high_3, low_3;
-    logic [7:0] x_3;
+    //logic [7:0] x_3;
     always_ff @(posedge clk ) begin
         high_3 <= high_prod;
         low_3 <= low_prod;
-        x_3 <= x_2;
+        //x_3 <= x_2;
     end
 
 
@@ -81,12 +83,12 @@ module sbox
     // Reg
 
     logic [7:0] out;
-    logic [7:0] x_4;
+    //logic [7:0] x_4;
     always_ff @(posedge clk ) begin
         out <= affine_inverse_iso_map;
         y <= out;
-        x_4 <= x_3;
-        my_x <= x_4;
+        //x_4 <= x_3;
+       // my_x <= x_4;
     end
 
 endmodule: sbox

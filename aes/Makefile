@@ -13,6 +13,12 @@ build_spem:
 run_spem: build_spem
 	vvp spem.out > str_spem.out
 
+build_sub_bytes:
+	iverilog -g2012 -o sub_bytes.out ./sub_bytes.sv ./sub_bytes_tb.sv ./sbox.sv ./simpl.sv ./spem.sv
+run_sub_bytes: build_sub_bytes
+	vvp sub_bytes.out > str_sub_bytes.out
+
+
 
 clean:
-	rm -f *.out *.vcd
+	rm -f *.out *.vcd 
