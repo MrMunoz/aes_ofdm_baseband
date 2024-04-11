@@ -21,27 +21,27 @@ module aes_round
     logic [127:0] double_subBytes_out;
     double_state double_subBytes(.data_in(subBytes_out), .data_out(double_subBytes_out));
 
-    
+    xor_network xor_net(.state(subBytes_out), .double_state(double_subBytes_out), .round_key(round_key), .data_out(data_out));
 
 endmodule: aes_round
 
 
-module aes_block
-(
-    input wire clk,
-    input wire [127:0] data_in,
-    input wire [127:0] key,
-    output logic [127:0]  data_out
-);
+// module aes_block
+// (
+//     input wire clk,
+//     input wire [127:0] data_in,
+//     input wire [127:0] key,
+//     output logic [127:0]  data_out
+// );
 
-// Initial key xor nonce||counter
+// // Initial key xor nonce||counter
 
-// Reg
+// // Reg
 
-// Stage i  x 9
-// Reg i    x 9
+// // Stage i  x 9
+// // Reg i    x 9
 
-// Stage 10
+// // Stage 10
     
-endmodule: aes_block
+// endmodule: aes_block
 
