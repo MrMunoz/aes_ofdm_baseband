@@ -1,4 +1,4 @@
-`default_nettype none
+
 
 module xor_network
 (
@@ -12,7 +12,7 @@ module xor_network
  
     genvar i;
     generate 
-        for(i = 0; i < 4; i++) begin 
+        for(i = 0; i < 4; i++) begin: network_generate
             // e_0
             localparam k0 = getk(0, i);
             localparam high_k0 = getHigh(k0);

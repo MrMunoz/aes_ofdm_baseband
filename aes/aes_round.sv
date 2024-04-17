@@ -1,8 +1,9 @@
-`default_nettype none
+
 
 module aes_round
 (
     input wire clk,
+    input wire reset,
     input wire [127:0] data_in,
     input wire [127:0] round_key,
     output logic [127:0] data_out
