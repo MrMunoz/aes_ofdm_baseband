@@ -2,13 +2,13 @@
 
 module double_state
 (
-    input wire [127:0] data_in,
+    input logic [127:0] data_in,
     output logic [127:0] data_out
 );
- 
+
     genvar i;
-    generate 
-        for(i = 0; i < 16; i++) begin 
+    generate
+        for(i = 0; i < 16; i++) begin
             double double_i(.x(data_in[(i+1)*8-1:i*8]), .y(data_out[(i+1)*8-1:i*8]));
         end
     endgenerate
@@ -17,7 +17,7 @@ endmodule: double_state
 
 module double
     (
-    input wire [7:0] x,
+    input logic [7:0] x,
     output logic [7:0] y
     );
 

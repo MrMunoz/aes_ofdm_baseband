@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module simpl_tb ();
-    
+
     logic [3:0] x,y, prod;
 
     spem dut (
@@ -14,7 +14,7 @@ module simpl_tb ();
         $display("Starting Sim"); //print nice message at start
         x = 0;
         y = 0;
-        #10
+        #10;
         for (int i = 0; i < $pow(2, 4); i++) begin
             for (int j = 0; j < $pow(2, 4); j++) begin
                 x = i;

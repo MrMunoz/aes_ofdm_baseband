@@ -2,8 +2,8 @@
 // A GF(2^4) multiplier
 module spem
     (
-    input wire [3:0] H,
-    input wire [3:0] B,
+    input logic [3:0] H,
+    input logic [3:0] B,
     output logic [3:0] prod
     );
 
@@ -20,8 +20,8 @@ endmodule: spem
 
 module w0
     (
-    input wire [3:2] H_H,
-    input wire [1:0] B_H,
+    input logic [3:2] H_H,
+    input logic [1:0] B_H,
     output logic [1:0] w
     );
 
@@ -39,8 +39,8 @@ endmodule: w0
 
 module w1
     (
-    input wire [3:0] H,
-    input wire [3:0] B,
+    input logic [3:0] H,
+    input logic [3:0] B,
     output logic [1:0] w
     );
 
@@ -63,8 +63,8 @@ endmodule: w1
 
 module w2
     (
-    input wire [1:0] H_L,
-    input wire [1:0] B_L,
+    input logic [1:0] H_L,
+    input logic [1:0] B_L,
     output logic [1:0] w
     );
 

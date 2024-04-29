@@ -2,8 +2,9 @@
 
 module sbox
     (
-    input wire clk,
-    input wire [7:0] x,
+    input logic clk,
+	input logic rst,
+    input logic [7:0] x,
     output logic [7:0] y
     //output logic [7:0] my_x
     );
@@ -17,9 +18,13 @@ module sbox
     logic [3:0] high_0, low_0, h_xor_l_0;
     //logic [7:0] x_0;
     always_ff @(posedge clk ) begin
-        high_0 <= mapped[7:4];
-        h_xor_l_0 <= mapped[7:4] ^ mapped[3:0];
-        low_0 <= mapped[3:0];
+        if(rst) begin
+            {high_0, low_0, h_xor_l_0} <='0;
+        end else begin
+            high_0 <= mapped[7:4];
+            h_xor_l_0 <= mapped[7:4] ^ mapped[3:0];
+            low_0 <= mapped[3:0];
+        end
         //x_0 <= x;
     end
 
@@ -36,9 +41,13 @@ module sbox
     logic [3:0] high_1, h_xor_l_1, prod_xor_map_1;
     //logic [7:0] x_1;
     always_ff @(posedge clk ) begin
-        high_1 <= high_0;
-        h_xor_l_1 <= h_xor_l_0;
-        prod_xor_map_1 <= stage_1_lambda ^ stage_1_prod;
+        if(rst) begin
+            {high_1, h_xor_l_1, prod_xor_map_1} <='0;
+        end else begin
+            high_1 <= high_0;
+            h_xor_l_1 <= h_xor_l_0;
+            prod_xor_map_1 <= stage_1_lambda ^ stage_1_prod;
+        end
         //x_1 <= x_0;
     end
 
@@ -51,9 +60,13 @@ module sbox
     logic [3:0] high_2, h_xor_l_2, inv_2;
     //logic [7:0] x_2;
     always_ff @(posedge clk ) begin
-        high_2 <= high_1;
-        h_xor_l_2 <= h_xor_l_1;
-        inv_2 <= inv;
+        if(rst) begin
+            {high_2, h_xor_l_2, inv_2} <='0;
+        end else begin
+            high_2 <= high_1;
+            h_xor_l_2 <= h_xor_l_1;
+            inv_2 <= inv;
+        end
        // x_2 <= x_1;
     end
 
@@ -69,8 +82,12 @@ module sbox
     logic [3:0] high_3, low_3;
     //logic [7:0] x_3;
     always_ff @(posedge clk ) begin
-        high_3 <= high_prod;
-        low_3 <= low_prod;
+        if(rst) begin
+            {high_3, low_3} <='0;
+        end else begin
+            high_3 <= high_prod;
+            low_3 <= low_prod;
+        end
         //x_3 <= x_2;
     end
 
@@ -85,8 +102,12 @@ module sbox
     logic [7:0] out;
     //logic [7:0] x_4;
     always_ff @(posedge clk ) begin
-        out <= affine_inverse_iso_map;
-        y <= out;
+        if(rst) begin
+            {y, out} <='0;
+        end else begin
+            out <= affine_inverse_iso_map;
+            y <= out;
+        end
         //x_4 <= x_3;
        // my_x <= x_4;
     end
@@ -95,7 +116,7 @@ endmodule: sbox
 
 // module gf_2_4_lamba_square_comp
 //     (
-//     input wire [3:0] x,
+//     input logic [3:0] x,
 //     output logic [3:0] y
 //     );
 
@@ -105,7 +126,7 @@ endmodule: sbox
 
 module gf_2_4_lamba_mult
     (
-    input wire [3:0] x,
+    input logic [3:0] x,
     output logic [3:0] y
     );
 
@@ -115,7 +136,7 @@ endmodule: gf_2_4_lamba_mult
 
 module gf_2_4_square
     (
-    input wire [3:0] x,
+    input logic [3:0] x,
     output logic [3:0] y
     );
 
@@ -125,7 +146,7 @@ endmodule: gf_2_4_square
 
 module isomorphic_map
     (
-    input wire [7:0] x,
+    input logic [7:0] x,
     output logic [7:0] y
     );
 
@@ -144,7 +165,7 @@ endmodule: isomorphic_map
 
 module affine_inverse_iso
     (
-    input wire [7:0] x,
+    input logic [7:0] x,
     output logic [7:0] y
     );
 
@@ -158,6 +179,6 @@ module affine_inverse_iso
         y[1] = x[7]^x[0];
         y[0] = x[7]^x[6]^x[2]^x[1]^x[0];
         y ^= 'h63;
-    end    
+    end
 
 endmodule: affine_inverse_iso

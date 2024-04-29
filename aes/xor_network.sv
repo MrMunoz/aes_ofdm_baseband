@@ -2,17 +2,17 @@
 
 module xor_network
 (
-    input wire [127:0] state,
-    input wire [127:0] double_state,
-    input wire [127:0] round_key,
+    input logic [127:0] state,
+    input logic [127:0] double_state,
+    input logic [127:0] round_key,
     output logic [127:0] data_out
-);  
+);
 
     logic [127:0] temp;
- 
+
     genvar i;
-    generate 
-        for(i = 0; i < 4; i++) begin 
+    generate
+        for(i = 0; i < 4; i++) begin
             // e_0
             localparam k0 = getk(0, i);
             localparam high_k0 = getHigh(k0);
@@ -37,7 +37,7 @@ module xor_network
             localparam k10 = getk(10, i);
             localparam high_k10 = getHigh(k10);
             localparam low_k10 = getLow(k10);
-            
+
             localparam k15 = getk(15, i);
             localparam high_k15 = getHigh(k15);
             localparam low_k15 = getLow(k15);

@@ -4,13 +4,13 @@
 */
 module simpl
     (
-    input wire [3:0] x,
+    input logic [3:0] x,
     output logic [3:0] y
     );
-    
+
 always_comb begin
-    y[0] = x[3]&x[2]&x[1] ^ x[3]&x[2]&x[0] ^ x[3]&x[1] 
-         ^ x[3]&x[1]&x[0] ^ x[3]&x[0]      ^ x[2] 
+    y[0] = x[3]&x[2]&x[1] ^ x[3]&x[2]&x[0] ^ x[3]&x[1]
+         ^ x[3]&x[1]&x[0] ^ x[3]&x[0]      ^ x[2]
          ^ x[2]&x[1]      ^ x[2]&x[1]&x[0] ^ x[1]
          ^ x[0];
 
@@ -19,8 +19,8 @@ always_comb begin
 
     y[2] = x[3]&x[2]&x[1] ^ x[3]&x[2]&x[0] ^ x[3]&x[0]
          ^ x[2]           ^ x[2]&x[1];
-    
-    y[3] = x[3]&x[0]      ^ x[3]&x[2]&x[1] ^ x[3] 
+
+    y[3] = x[3]&x[0]      ^ x[3]&x[2]&x[1] ^ x[3]
          ^ x[2];
 
 end
