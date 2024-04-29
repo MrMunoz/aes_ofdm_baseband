@@ -9,13 +9,14 @@ module sub_bytes_tb ();
         #2.5;
         clock = 1;
     end
-    
+
     int count, file;
     string file_path = "testvectors/sub_bytes.txt";
     logic [127:0] x,y;
 
     sub_bytes dut (
         .clk(clock),
+        .rst(rst),
         .data_in(x),
         .data_out(y)
     );
@@ -33,7 +34,7 @@ module sub_bytes_tb ();
         $fscanf(file, "%h", x);
         count <= count + 1;
        // $display("in: %h", x);
-    end 
+    end
 
     always_ff @(posedge clock) begin
         $display("%h", y);

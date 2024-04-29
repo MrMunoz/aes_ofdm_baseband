@@ -9,11 +9,12 @@ module sbox_tb ();
         #2.5;
         clock = 1;
     end
-    
+
     logic [7:0] x,y,my_x;
 
     sbox dut (
         .clk(clock),
+        .rst(rst),
         .x(x),
         .y(y),
         .my_x(my_x)
@@ -29,7 +30,7 @@ module sbox_tb ();
     always_ff @(posedge clock) begin
         x <= x + 1;
        // $display("in: %h", x);
-    end 
+    end
 
     always_ff @(posedge clock) begin
         $display("%h %h", my_x, y);

@@ -9,13 +9,14 @@ module aes_round_tb ();
         #2.5;
         clock = 1;
     end
-    
+
     int count, file;
     string file_path = "testvectors/aes_round.txt";
     logic [127:0] x, k ,y;
 
     aes_round dut (
         .clk(clock),
+        .rst(rst),
         .data_in(x),
         .round_key(k),
         .data_out(y)
@@ -36,7 +37,7 @@ module aes_round_tb ();
         end
         count <= count + 1;
        // $display("in: %h", x);
-    end 
+    end
 
     always_ff @(posedge clock) begin
         $display("%h", y);

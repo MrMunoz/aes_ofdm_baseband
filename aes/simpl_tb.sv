@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module simpl_tb ();
-    
+
     logic [3:0] x,y;
 
     simpl dut (

@@ -20,7 +20,7 @@ module aes_final_round
     end
 
     logic [127:0] subBytes_out;
-    sub_bytes subBytes(.clk(clk), .data_in(state_0), .data_out(subBytes_out));
+    sub_bytes subBytes(.clk(clk), .rst(rst), .data_in(state_0), .data_out(subBytes_out));
 
     logic [127:0] shift_rows_out;
     shift_rows shiftRows(.data_in(subBytes_out), .data_out(shift_rows_out));

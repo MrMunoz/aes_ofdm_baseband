@@ -11,7 +11,7 @@ module sub_bytes
     genvar i;
     generate
         for(i = 0; i < 16; i++) begin: sub_generate
-            sbox sub_i(.clk(clk), .x(data_in[(i+1)*8-1:i*8]), .y(data_out[(i+1)*8-1:i*8]));
+            sbox sub_i(.clk(clk), .rst(rst), .x(data_in[(i+1)*8-1:i*8]), .y(data_out[(i+1)*8-1:i*8]));
         end
     endgenerate
 
