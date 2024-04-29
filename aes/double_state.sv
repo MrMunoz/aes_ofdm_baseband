@@ -1,4 +1,4 @@
-`default_nettype none
+
 
 module double_state
 (
@@ -8,7 +8,7 @@ module double_state
 
     genvar i;
     generate
-        for(i = 0; i < 16; i++) begin
+        for(i = 0; i < 16; i++) begin: double_generate
             double double_i(.x(data_in[(i+1)*8-1:i*8]), .y(data_out[(i+1)*8-1:i*8]));
         end
     endgenerate

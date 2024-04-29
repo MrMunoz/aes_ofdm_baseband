@@ -1,2 +1,12 @@
-+incdir+/home/munoz/cs350c/aes_ofdm_baseband/aes
-+incdir+/home/munoz/cs350c/aes_ofdm_baseband/aes
+-v /home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules/verbosity_pkg.sv
+-v /home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules/avalon_mm_pkg.sv
+-v /home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules/avalon_utilities_pkg.sv
+-v /home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules/mgc_common_axi.sv
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/aes
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/db/ip/slda7f67b63/submodules
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/synthesis/submodules
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/aes
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/db/ip/slda7f67b63/submodules
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/simulation/submodules
++incdir+/home/jonathan/cs350c/aes_ofdm_baseband/quartus_proj/DE10_NANO_SoC_GHRD/soc_system/synthesis/submodules

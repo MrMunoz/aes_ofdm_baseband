@@ -1,4 +1,4 @@
-`default_nettype none
+
 /*
     Implements inverse of x over GF(2^4)
 */

@@ -1,4 +1,4 @@
-`default_nettype none
+
 module sub_bytes
 (
     input logic clk,
@@ -10,7 +10,7 @@ module sub_bytes
 
     genvar i;
     generate
-        for(i = 0; i < 16; i++) begin
+        for(i = 0; i < 16; i++) begin: sub_generate
             sbox sub_i(.clk(clk), .x(data_in[(i+1)*8-1:i*8]), .y(data_out[(i+1)*8-1:i*8]));
         end
     endgenerate
