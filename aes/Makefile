@@ -1,3 +1,8 @@
+build_aes_core:
+	iverilog -g2012 -o aes_core.out aes_core.sv aes_core_tb.sv shift_rows.sv key_expand.sv aes_round.sv aes_final_round.sv double_state.sv sub_bytes.sv sbox.sv simpl.sv spem.sv xor_network.sv
+run_aes_core: build_aes_core
+	vvp aes_core.out > str_aes_core.out
+
 build_aes_round:
 	iverilog -g2012 -o aes_round.out aes_round.sv aes_round_tb.sv double_state.sv sub_bytes.sv sbox.sv simpl.sv spem.sv xor_network.sv
 run_aes_round: build_aes_round
@@ -10,12 +15,12 @@ run_sbox: build_sbox
 	vvp sbox.out > str_sbox.out
 
 build_simpl:
-	iverilog -g2012 -o simpl.out simpl.sv simpl_tb.sv 
+	iverilog -g2012 -o simpl.out simpl.sv simpl_tb.sv
 run_simpl: build_simpl
 	vvp simpl.out > str_simpl.out
 
 build_spem:
-	iverilog -g2012 -o spem.out spem.sv spem_tb.sv 
+	iverilog -g2012 -o spem.out spem.sv spem_tb.sv
 run_spem: build_spem
 	vvp spem.out > str_spem.out
 
@@ -27,4 +32,4 @@ run_sub_bytes: build_sub_bytes
 
 
 clean:
-	rm -f *.out *.vcd 
+	rm -f *.out *.vcd

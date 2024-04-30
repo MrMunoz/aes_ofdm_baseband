@@ -56,8 +56,8 @@ module xor_network
 
     function automatic integer getk;
         input integer inital_offset;
-        input integer i;
-        getk = (inital_offset + 4 * i) % 16;
+        input integer c;
+        getk = (inital_offset + 4 * c) % 16;
     endfunction
 
     function automatic integer getHigh;

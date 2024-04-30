@@ -4,6 +4,8 @@ module sbox
     (
     input logic clk,
 	input logic rst,
+    input logic valid,
+    output logic out_valid,
     input logic [7:0] x,
     output logic [7:0] y
     //output logic [7:0] my_x
@@ -16,15 +18,18 @@ module sbox
 
     // Reg
     logic [3:0] high_0, low_0, h_xor_l_0;
+    logic valid_0;
     //logic [7:0] x_0;
     always_ff @(posedge clk ) begin
         if(rst) begin
             {high_0, low_0, h_xor_l_0} <='0;
-        end else begin
+            valid_0 <= '0;
+        end else if (1||valid) begin
             high_0 <= mapped[7:4];
             h_xor_l_0 <= mapped[7:4] ^ mapped[3:0];
             low_0 <= mapped[3:0];
         end
+        valid_0 <= valid;
         //x_0 <= x;
     end
 
@@ -39,16 +44,19 @@ module sbox
 
     // Reg
     logic [3:0] high_1, h_xor_l_1, prod_xor_map_1;
+    logic valid_1;
     //logic [7:0] x_1;
     always_ff @(posedge clk ) begin
         if(rst) begin
             {high_1, h_xor_l_1, prod_xor_map_1} <='0;
-        end else begin
+            valid_1 <= '0;
+        end else if (1 || valid_0) begin
             high_1 <= high_0;
             h_xor_l_1 <= h_xor_l_0;
             prod_xor_map_1 <= stage_1_lambda ^ stage_1_prod;
         end
-        //x_1 <= x_0;
+
+        valid_1 <= valid_0;
     end
 
     // Stage 2
@@ -58,15 +66,20 @@ module sbox
 
     // Reg
     logic [3:0] high_2, h_xor_l_2, inv_2;
+    logic valid_2;
+
     //logic [7:0] x_2;
     always_ff @(posedge clk ) begin
         if(rst) begin
             {high_2, h_xor_l_2, inv_2} <='0;
-        end else begin
+            valid_2 <= '0;
+        end else if (1 || valid_1) begin
             high_2 <= high_1;
             h_xor_l_2 <= h_xor_l_1;
             inv_2 <= inv;
         end
+
+        valid_2 <= valid_1;
        // x_2 <= x_1;
     end
 
@@ -80,14 +93,17 @@ module sbox
     // Reg
 
     logic [3:0] high_3, low_3;
+    logic valid_3;
     //logic [7:0] x_3;
     always_ff @(posedge clk ) begin
         if(rst) begin
             {high_3, low_3} <='0;
-        end else begin
+            valid_3 <= '0;
+        end else if (1 || valid_2) begin
             high_3 <= high_prod;
             low_3 <= low_prod;
         end
+        valid_3 <= valid_2;
         //x_3 <= x_2;
     end
 
@@ -103,11 +119,13 @@ module sbox
     //logic [7:0] x_4;
     always_ff @(posedge clk ) begin
         if(rst) begin
-            {y, out} <='0;
-        end else begin
-            out <= affine_inverse_iso_map;
-            y <= out;
+            {y} <='0;
+            out_valid <= '0;
+        end else if (1 || valid_3) begin
+            y <= affine_inverse_iso_map;
         end
+
+        out_valid <= valid_3;
         //x_4 <= x_3;
        // my_x <= x_4;
     end
